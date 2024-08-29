@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { addVideoHistoryAPI } from '../../services/allAPI';
 
 
-function VideoCard({video}) {
+function VideoCard({video,removeVideo,insideCategory}) {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -24,15 +24,24 @@ function VideoCard({video}) {
 
   };
 
+  const dragStarted = (e,id)=>{
+    console.log("drag started",id);
+    e.dataTransfer.setData("videoid",id)
+
+  }
+
 
   return (
     <>
-    <Card style={{ width: '17rem' }}>
+    <Card style={{ width: '17rem' }} draggable onDragStart={(e)=>dragStarted(e,video?.id)}>
       <Card.Img variant="top" src={video?.url} onClick={handleShow} />
       <Card.Body>
         <Card.Title className='d-flex justify-content-between align-items-center py-2'>
           <h5>{video?.name}</h5>
-        <Button variant="danger"><i class="fa-solid fa-trash"></i></Button>
+          {
+            insideCategory?null:<Button onClick={()=>{removeVideo(video.id)}} variant="danger"><i class="fa-solid fa-trash"></i></Button>
+          }
+
 
         </Card.Title>
 

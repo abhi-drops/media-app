@@ -6,6 +6,7 @@ import View from '../Components/View';
 
 function Home() {
   const[uploadVideoResponse,setUploadvideoResponse]=useState({})
+  const [dropVideoResponse,setDropVideoResponse]=useState({})
   return (
     <div className="">
       <div className="container mt-3 mb-3 d-flex justify-content-between">
@@ -19,11 +20,11 @@ function Home() {
       <div className="container-fluid mt-5 mb-3 row">
         <div className="all-videos col-lg-9">
           <h2>All-Videos</h2>
-          <View uploadVideoResponse={uploadVideoResponse} />
+          <View uploadVideoResponse={uploadVideoResponse} setDropVideoResponse={setDropVideoResponse} />
         </div>
 
         <div className="category col-lg-3">
-        <Category/>
+        <Category dropVideoResponse={dropVideoResponse} />
         </div>
 
       </div>
